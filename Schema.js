@@ -1,13 +1,19 @@
+import {fromNode} from 'bluebird';
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLString
+  GraphQLID,
+  GraphQLString,
+  GraphQLNonNull,
 } from 'graphql';
 
-const User = new GraphQLObjectType({
-  name: 'User',
+const Story = new GraphQLObjectType({
+  name: 'Story',
   fields: () => ({
-    name: {
+    id: {
+      type: GraphQLID
+    },
+    text: {
       type: GraphQLString
     }
   })
@@ -16,12 +22,25 @@ const User = new GraphQLObjectType({
 const Query = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
-    user: {
-      type: User,
-      resolve() {
-        return {
-          name: 'freiksenet'
-        };
+    bestStoryEver: {
+      type: Story,
+      resolve(parent, args, {db}) {
+        return fromNode((callback) => db.get(`
+          SELECT * FROM Story LIMIT 1
+        `, callback));
+      }
+    },
+    story: {
+      type: Story,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve(parent, {id}, {db}) {
+        return fromNode((callback) => db.get(`
+          SELECT * FROM Story WHERE id = $id
+          `, {$id: id}, callback));
       }
     }
   })

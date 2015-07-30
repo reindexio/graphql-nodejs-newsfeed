@@ -1,12 +1,9 @@
-import {promisifyAll} from 'bluebird';
 import sqlite3 from 'sqlite3';
 import {DB_PATH} from './config';
 
-promisifyAll(sqlite3);
-
 async function openConnection(request, reply) {
   try {
-    request.db = await new sqlite3.Database(DB_PATH);
+    request.db = new sqlite3.Database(DB_PATH);
     reply.continue();
   } catch (error) {
     reply(error);
