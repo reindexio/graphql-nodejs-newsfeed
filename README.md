@@ -1,5 +1,6 @@
 # graphql-nodejs-newsfeed
-Example of graphql nodejs backend with newsfeed, built with hapi and sqlite
+
+Example of a GraphQL Node.js backend for a news feed, built with Hapi and SQLite.
 
 ```
 $ npm start
