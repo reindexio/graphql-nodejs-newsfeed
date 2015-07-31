@@ -1,7 +1,7 @@
 {
   "name": "graphql-nodejs-newsfeed",
   "version": "1.0.0",
-  "description": "Example of graphql nodejs backend with newsfeed, built with hapi and sqlite",
+  "description": "Example of a GraphQL Node.js backend for a news feed, built with Hapi and SQLite",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/freiksenet/graphql-nodejs-newsfeed.git"
+    "url": "git+https://github.com/reindexio/graphql-nodejs-newsfeed.git"
   },
   "author": "Mikhail <freiksenet@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/freiksenet/graphql-nodejs-newsfeed/issues"
+    "url": "https://github.com/reindexio/graphql-nodejs-newsfeed/issues"
   },
-  "homepage": "https://github.com/freiksenet/graphql-nodejs-newsfeed#readme",
+  "homepage": "https://github.com/reindexio/graphql-nodejs-newsfeed#readme",
   "dependencies": {
     "babel": "^5.8.19",
     "bluebird": "^2.9.34",
