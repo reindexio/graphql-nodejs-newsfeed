@@ -10,7 +10,10 @@ async function graphQLHandler(request, reply) {
   const result = await graphql(
     Schema,
     query,
-    {db: request.db},
+    {
+      db: request.db,
+      userId: 1
+    },
     variables
   );
   return reply(result);

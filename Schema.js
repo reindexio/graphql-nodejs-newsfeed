@@ -1,4 +1,3 @@
-import {fromNode} from 'bluebird';
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -20,9 +19,9 @@ const Story = new GraphQLObjectType({
     author: {
       type: User,
       resolve(parent, args, {db}) {
-        return fromNode((callback) => db.get(`
+        return db.get(`
           SELECT * FROM User WHERE id = $id
-        `, {$id: parent.author}, callback));
+        `, {$id: parent.author});
       }
     }
   })
@@ -40,9 +39,9 @@ const User = new GraphQLObjectType({
     stories: {
       type: new GraphQLList(Story),
       resolve(parent, args, {db}) {
-        return fromNode((callback) => db.all(`
+        return db.all(`
           SELECT * FROM Story WHERE author = $user
-        `, {$user: parent.id}, callback));
+        `, {$user: parent.id});
       }
     }
   })
@@ -53,10 +52,10 @@ const Query = new GraphQLObjectType({
   fields: () => ({
     viewer: {
       type: User,
-      resolve(parent, args, {db}) {
-        return fromNode((callback) => db.get(`
-          SELECT * FROM User WHERE name = 'freiksenet'
-        `, callback));
+      resolve(parent, args, {db, userId}) {
+        return db.get(`
+          SELECT * FROM User WHERE id = $id
+        `, {id: userId});
       }
     },
     user: {
@@ -67,9 +66,9 @@ const Query = new GraphQLObjectType({
         }
       },
       resolve(parent, {id}, {db}) {
-        return fromNode((callback) => db.get(`
+        return db.get(`
           SELECT * FROM User WHERE id = $id
-          `, {$id: id}, callback));
+          `, {$id: id});
       }
     },
     story: {
@@ -80,9 +79,9 @@ const Query = new GraphQLObjectType({
         }
       },
       resolve(parent, {id}, {db}) {
-        return fromNode((callback) => db.get(`
+        return db.get(`
           SELECT * FROM Story WHERE id = $id
-          `, {$id: id}, callback));
+          `, {$id: id});
       }
     }
   })
