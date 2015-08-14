@@ -11,8 +11,8 @@ $ npm start
 
 ## Test database
 
-`bin/createdb.sql` contains sql script to create a test database. You can create one with
+`scripts/createdb.sql` contains sql script to create a test database. You can create one with
 
 ```
-$ cat bin/createdb.sql | sqlite3 ./db.sqlite3
+$ cat scripts/createdb.sql | sqlite3 ./db.sqlite3
 ```
