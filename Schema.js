@@ -18,7 +18,7 @@ const Story = new GraphQLObjectType({
     },
     author: {
       type: User,
-      resolve(parent, args, {db}) {
+      resolve(parent, args, {rootValue: {db}}) {
         return db.get(`
           SELECT * FROM User WHERE id = $id
         `, {$id: parent.author});
@@ -38,7 +38,7 @@ const User = new GraphQLObjectType({
     },
     stories: {
       type: new GraphQLList(Story),
-      resolve(parent, args, {db}) {
+      resolve(parent, args, {rootValue: {db}}) {
         return db.all(`
           SELECT * FROM Story WHERE author = $user
         `, {$user: parent.id});
@@ -52,10 +52,10 @@ const Query = new GraphQLObjectType({
   fields: () => ({
     viewer: {
       type: User,
-      resolve(parent, args, {db, userId}) {
+      resolve(parent, args, {rootValue: {db, userId}}) {
         return db.get(`
           SELECT * FROM User WHERE id = $id
-        `, {id: userId});
+        `, {$id: userId});
       }
     },
     user: {
@@ -65,7 +65,7 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLID)
         }
       },
-      resolve(parent, {id}, {db}) {
+      resolve(parent, {id}, {rootValue: {db}}) {
         return db.get(`
           SELECT * FROM User WHERE id = $id
           `, {$id: id});
@@ -78,7 +78,7 @@ const Query = new GraphQLObjectType({
           type: new GraphQLNonNull(GraphQLID)
         }
       },
-      resolve(parent, {id}, {db}) {
+      resolve(parent, {id}, {rootValue: {db}}) {
         return db.get(`
           SELECT * FROM Story WHERE id = $id
           `, {$id: id});

@@ -12,7 +12,7 @@ async function graphQLHandler(request, reply) {
     query,
     {
       db: request.db,
-      userId: 1
+      userId: '1'
     },
     variables
   );

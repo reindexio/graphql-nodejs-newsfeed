@@ -20,7 +20,7 @@
   "dependencies": {
     "babel": "^5.8.19",
     "bluebird": "^2.9.34",
-    "graphql": "^0.1.12",
+    "graphql": "^0.4.3",
     "hapi": "^8.8.0",
     "sqlite3": "^3.0.9"
   },
