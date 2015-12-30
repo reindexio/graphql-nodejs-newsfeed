@@ -12,3 +12,9 @@ $ sqlite3 db.sqlite3 < scripts/createdb.sql
 ```
 $ npm start
 ```
+
+## Example Query
+
+```
+$ curl --data "query={   __schema {     types {       name     }   } }" localhost:8000
+```
