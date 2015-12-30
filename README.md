@@ -16,5 +16,5 @@ $ npm start
 ## Example Query
 
 ```
-$ curl --data "query={   __schema {     types {       name     }   } }" localhost:8000
+$ curl --data "query={ __schema { types { name } } }" localhost:8000
 ```
