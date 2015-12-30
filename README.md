@@ -4,7 +4,7 @@ Example of graphql nodejs backend with newsfeed, built with hapi and sqlite
 ## Set Up Database
 
 ```
-sqlite3 db.sqlite3 < scripts/createdb.sql
+$ sqlite3 db.sqlite3 < scripts/createdb.sql
 ```
 
 ## Run Server
